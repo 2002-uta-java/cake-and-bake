@@ -3,10 +3,22 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.revature.cake_and_bake</groupId>
-	<artifactId>CakeAndBake</artifactId>
+	<artifactId>cake-and-bake</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.3</version>
+				<configuration>
+					<warName>bird.war</warName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
