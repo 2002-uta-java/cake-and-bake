@@ -99,3 +99,6 @@ Servers/
 */.vscode
 
 .sts4-cache
+
+# ignore the Servers folder
+Servers/
