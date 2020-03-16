@@ -15,6 +15,7 @@ public class RecipeServiceTest {
 		for (final Recipe recipe : service.getAllRecipes())
 			System.out.println(recipe);
 
+		
 		((ConfigurableApplicationContext) ac).close();
 	}
 }
