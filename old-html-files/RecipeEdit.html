@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit/Add Recipe</title>
+<link rel='stylesheet' type='text/css' href='Pantry.css' />
+<link rel='stylesheet' type='text/css' href='RecipeDisplay.css' />
+<link rel='stylesheet' type='text/css' href='RecipeEdit.css' />
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.2.min.js"></script>
+<script src="RecipeEdit.js"></script>
+</head>
+<body>
+
+	<div id="previewDiv"></div>
+
+	<div id="mainDiv">
+
+
+		<div id="titleDiv">
+			<label for="titleInput">Title: </label> <input type="text"
+				name="titleInput" id="titleInput" /> <br />
+			<button id="titleNext">Next</button>
+		</div>
+
+		<div id="suppliesDiv">
+
+			<h3>Supplies</h3>
+			<ul id=suppliesList>
+				<li id=supply1><input type="text" name="supplyInput1"
+					id="supplyInput1" /></li>
+			</ul>
+			<button id='addSupply'>Add Supply</button>
+			<p />
+			<button id="suppliesNext">Next</button>
+			<p />
+			<button id="suppliesBack">Back</button>
+
+		</div>
+
+		<div id=instDiv>
+
+			<h3>Instructions</h3>
+			<ol id=instList>
+				<li id=inst1><input type="text" name="instInput1"
+					id="instInput1" /></li>
+			</ol>
+			<button id='addInst'>Add Instruction</button>
+			<p />
+			<button id="instNext">Next</button>
+			<p />
+			<button id="instBack">Back</button>
+		</div>
+
+
+		<div id=notesDiv>
+
+			<h3>Notes</h3>
+			<ol id=notesList>
+				<li id=inst1Notes>
+					<ul type="disc">
+						<li><input type="text" name="inst1notes11"
+							id="inst1notes1Input" /></li>
+					</ul>
+				</li>
+			</ol>
+			<button id='addInstNotes'>Add Instruction Notes</button>
+			<p />
+			<button id="save">Save Recipe</button>
+			<p />
+			<button id="notesBack">Back</button>
+		</div>
+	</div>
+
+</body>
+</html>

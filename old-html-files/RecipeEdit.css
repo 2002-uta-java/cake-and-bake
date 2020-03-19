@@ -1,0 +1,26 @@
+@CHARSET "UTF-8";
+
+/* overwrites body[width] in Pantry .css (doubles it) */
+body {
+	width: 1030px;
+}
+
+#mainDiv {
+	width: 500px;
+	margin-right: 15px;
+	
+}
+
+#previewDiv {
+	float:right;
+	width: 500px;
+	margin-left: 15px;
+}
+
+input[type="text"] {
+	width:85%;
+}
+
+button {
+	float:right;
+}
