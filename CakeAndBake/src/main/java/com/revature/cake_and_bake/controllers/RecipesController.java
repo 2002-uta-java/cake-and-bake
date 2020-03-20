@@ -28,7 +28,7 @@ import com.revature.cake_and_bake.models.js.RecipeMinimalJS;
 import com.revature.cake_and_bake.services.RecipeService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/recipes")
 public class RecipesController implements Serializable {
 
