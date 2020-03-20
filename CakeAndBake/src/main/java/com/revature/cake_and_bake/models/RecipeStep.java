@@ -3,8 +3,10 @@ package com.revature.cake_and_bake.models;
 import java.io.Serializable;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
@@ -59,6 +61,9 @@ public class RecipeStep implements Serializable {
 	public void setInst(String inst) {
 		this.inst = inst;
 	}
+
+
+
 
 	@Override
 	public String toString() {

@@ -6,24 +6,22 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
 
 @Component
 @Embeddable
-public class RecipeStepId implements Serializable {
+public class IngredientId implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
-//	@PrimaryKeyJoinColumn(name = "rcp_id", referencedColumnName = "rcp_id")
 	@JoinColumn(name = "rcp_id")
 	private RecipeFull recipe;
 
-	@Column(name = "rcp_step_no")
-	private int stepNo;
+	@Column(name = "ing_no")
+	private int ingNo;
 
-	public RecipeStepId() {
+	public IngredientId() {
 		super();
 	}
 
@@ -35,45 +33,45 @@ public class RecipeStepId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RecipeStepId other = (RecipeStepId) obj;
+		IngredientId other = (IngredientId) obj;
+		if (ingNo != other.ingNo)
+			return false;
 		if (recipe == null) {
 			if (other.recipe != null)
 				return false;
 		} else if (!recipe.equals(other.recipe))
 			return false;
-		if (stepNo != other.stepNo)
-			return false;
 		return true;
+	}
+
+	public int getIngNo() {
+		return ingNo;
 	}
 
 	public RecipeFull getRecipe() {
 		return recipe;
 	}
 
-	public int getStepNo() {
-		return stepNo;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ingNo;
 		result = prime * result + ((recipe == null) ? 0 : recipe.hashCode());
-		result = prime * result + stepNo;
 		return result;
+	}
+
+	public void setIngNo(int ingNo) {
+		this.ingNo = ingNo;
 	}
 
 	public void setRecipe(RecipeFull recipe) {
 		this.recipe = recipe;
 	}
 
-	public void setStepNo(int stepNo) {
-		this.stepNo = stepNo;
-	}
-
 	@Override
 	public String toString() {
-		return "RecipeStepId [recipe=" + (recipe != null ? "" + recipe.getId() : "null") + ", stepNo=" + stepNo + "]";
+		return "IngredientId [recipe=" + (recipe != null ? "" + recipe.getId() : "null") + ", ingNo=" + ingNo + "]";
 	}
 
 }

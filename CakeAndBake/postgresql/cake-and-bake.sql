@@ -1,9 +1,12 @@
 /*
- * Create table with an id, name, and description (likely will add more things)
+ * Create table with an id, name, description, url to pic, ratings, and number of ratings
  */
 create table recipes (rcp_id serial constraint p_rcp_id primary key,
 rcp_name varchar(40) not null,
-rcp_descript varchar(500) not null );
+rcp_descript varchar(500) not null,
+rcp_pic_url varchar(100),
+rcp_ratings int4,
+rcp_num_ratings int4);
 
 /*
  * Create recipe steps which link recipe id's to recipe steps. The recipe and id and step number, together, form a primary key. Finally have instructions for this step.
@@ -14,10 +17,23 @@ rcp_step_inst varchar(500) not null,
 primary key (rcp_id,
 rcp_step_no));
 
+create table recipe_ingredients (rcp_id int4 references recipes(rcp_id) not null,
+ing_no int4 not null,
+ing_name varchar(100) not null,
+ing_amount varchar(100) not null,
+primary key (rcp_id, ing_no));
+
+create table recipe_comments(rcp_id int4 references recipes(rcp_id) not null,
+comment_no int4 not null,
+comment_value varchar(140) not null,
+primary key (rcp_id, comment_no));
+
 drop table recipes;
 drop table recipe_steps;
+drop table recipe_ingredients;
+drop table recipe_comments;
 
-truncate table recipes, recipe_steps;
+truncate table recipes, recipe_steps, recipe_ingredients, recipe_comments;
 
 insert into recipes(rcp_name, rcp_descript) values ('Cheesecake', 'Chef Anna Olson takes you step by step through her amazing New York cheesecake recipe.');
 
