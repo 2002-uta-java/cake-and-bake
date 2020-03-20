@@ -5,11 +5,12 @@ import java.util.List;
 
 import com.revature.cake_and_bake.models.RecipeFull;
 import com.revature.cake_and_bake.models.RecipeMinimal;
+import com.revature.cake_and_bake.models.join_table.Recipe;
 
 public interface RecipeDao extends Serializable {
 	public List<RecipeMinimal> getAllRecipesMinimal();
 
-	public RecipeFull getFullRecipeById(int id);
+	public Recipe getFullRecipeById(int id);
 
 	public boolean createRecipe(RecipeMinimal recipe);
 
@@ -23,4 +24,6 @@ public interface RecipeDao extends Serializable {
 	public boolean createRecipe(RecipeFull recipe);
 
 	public boolean deleteRecipeById(int rcpId);
+
+	public boolean createRecipe(Recipe recipe);
 }

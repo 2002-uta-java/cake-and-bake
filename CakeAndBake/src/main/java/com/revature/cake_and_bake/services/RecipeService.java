@@ -11,6 +11,7 @@ import com.revature.cake_and_bake.models.Ingredient;
 import com.revature.cake_and_bake.models.RecipeFull;
 import com.revature.cake_and_bake.models.RecipeMinimal;
 import com.revature.cake_and_bake.models.RecipeStep;
+import com.revature.cake_and_bake.models.join_table.Recipe;
 import com.revature.cake_and_bake.models.js.RecipeJS;
 
 @Service
@@ -62,12 +63,16 @@ public class RecipeService implements Serializable {
 	}
 
 	public RecipeJS getFullRecipeById(final int id) {
-		final RecipeFull recipe = rcpDao.getFullRecipeById(id);
+		final Recipe recipe = rcpDao.getFullRecipeById(id);
 		System.err.println();
 		System.err.println();
 		System.err.println(recipe);
 		System.err.println();
 		System.err.println();
 		return new RecipeJS(recipe);
+	}
+
+	public boolean createRecipe(final Recipe recipe) {
+		return rcpDao.createRecipe(recipe);
 	}
 }

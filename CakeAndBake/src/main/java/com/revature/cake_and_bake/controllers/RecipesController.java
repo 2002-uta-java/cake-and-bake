@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.revature.cake_and_bake.models.RecipeFull;
 import com.revature.cake_and_bake.models.RecipeMinimal;
+import com.revature.cake_and_bake.models.join_table.Recipe;
 import com.revature.cake_and_bake.models.js.RecipeJS;
 import com.revature.cake_and_bake.models.js.RecipeMinimalJS;
 import com.revature.cake_and_bake.services.RecipeService;
@@ -34,7 +36,9 @@ public class RecipesController implements Serializable {
 	private RecipeService rcpService;
 
 	@GetMapping
-	public List<RecipeMinimalJS> getAllRecipesMinimal() {
+	public List<RecipeMinimalJS> getAllRecipesMinimal(final HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-Origin", "*");
+
 		final List<RecipeMinimal> recipes = rcpService.getAllRecipesMinimal();
 		System.err.println();
 		System.err.println();
@@ -66,7 +70,8 @@ public class RecipesController implements Serializable {
 		System.err.println();
 
 		// convert recipeJs to a Recipe entity
-		final RecipeFull recipe = new RecipeFull(recipeJS);
+//		final RecipeFull recipe = new RecipeFull(recipeJS);
+		final Recipe recipe = new Recipe(recipeJS);
 
 		System.err.println(recipe);
 		System.err.println();

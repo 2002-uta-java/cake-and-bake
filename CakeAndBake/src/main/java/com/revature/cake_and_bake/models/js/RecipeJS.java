@@ -10,6 +10,10 @@ import com.revature.cake_and_bake.models.Comment;
 import com.revature.cake_and_bake.models.Ingredient;
 import com.revature.cake_and_bake.models.RecipeFull;
 import com.revature.cake_and_bake.models.RecipeStep;
+import com.revature.cake_and_bake.models.join_table.CommentAssociation;
+import com.revature.cake_and_bake.models.join_table.IngredientAssociation;
+import com.revature.cake_and_bake.models.join_table.Recipe;
+import com.revature.cake_and_bake.models.join_table.RecipeStepAssociation;
 
 @Component
 public class RecipeJS {
@@ -26,6 +30,66 @@ public class RecipeJS {
 
 	public RecipeJS() {
 		super();
+	}
+
+	public RecipeJS(final Recipe recipe) {
+		this.id = recipe.getRcpId();
+		this.name = recipe.getName();
+		this.description = recipe.getDescription();
+		this.picUrl = recipe.getPicUrl();
+		this.ratings = recipe.getRatings();
+		this.numRatings = recipe.getNumRatings();
+
+		// add steps if not null (shouldn't be)
+		final List<RecipeStepAssociation> rcpSteps = recipe.getSteps();
+		if (rcpSteps != null) {
+			// create new array list with capacity needed
+			this.steps = new ArrayList<>(rcpSteps.size());
+
+			// the database MAY give the steps out of order, so make sure they go in in the
+			// right order
+			// sort rcpSteps by step number
+			Collections.sort(rcpSteps, (r1, r2) -> Integer.compare(r1.getStepNo(), r2.getStepNo()));
+
+			for (final RecipeStepAssociation rcpStep : rcpSteps) {
+				// steps are 1-indexed so need to be converted to 0-indexed
+				this.steps.add(rcpStep.getInst());
+			}
+		}
+
+		// add ingredients if not null (shouldn't be)
+		final List<IngredientAssociation> rcpIngs = recipe.getIngredients();
+		if (rcpIngs != null) {
+			// create new array list of given capacity
+			this.ingredients = new ArrayList<>(rcpIngs.size());
+
+			// order doesn't really matter, but might as well give it as it was entered
+			Collections.sort(rcpIngs, (r1, r2) -> Integer.compare(r1.getIngNo(), r2.getIngNo()));
+
+			for (final IngredientAssociation rcpIng : rcpIngs) {
+				// create an ingredient js object
+				final IngredientJS ingJs = new IngredientJS();
+				ingJs.setName(rcpIng.getName());
+				ingJs.setAmount(rcpIng.getAmount());
+
+				this.ingredients.add(ingJs);
+			}
+		}
+
+		// add comments if not null (they may be)
+		final List<CommentAssociation> rcpComments = recipe.getComments();
+		if (rcpComments != null) {
+			// create new array list of needed capacity
+			this.comments = new ArrayList<>(rcpComments.size());
+
+			// give comments in order received in the database
+			// sort comments
+			Collections.sort(rcpComments, (r1, r2) -> Integer.compare(r1.getCommentNo(), r2.getCommentNo()));
+
+			for (final CommentAssociation rcpComment : rcpComments) {
+				this.comments.add(rcpComment.getCommentValue());
+			}
+		}
 	}
 
 	public RecipeJS(final RecipeFull recipe) {
@@ -84,7 +148,7 @@ public class RecipeJS {
 					(r1, r2) -> Integer.compare(r1.getId().getCommentNo(), r2.getId().getCommentNo()));
 
 			for (final Comment rcpComment : rcpComments) {
-				this.comments.add(rcpComment.getId().getCommentNo() - 1, rcpComment.getCommentValue());
+				this.comments.add(rcpComment.getCommentValue());
 			}
 		}
 	}
