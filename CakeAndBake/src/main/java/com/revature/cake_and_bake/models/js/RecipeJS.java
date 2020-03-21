@@ -2,7 +2,9 @@ package com.revature.cake_and_bake.models.js;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
@@ -55,6 +57,7 @@ public class RecipeJS {
 				// steps are 1-indexed so need to be converted to 0-indexed
 				this.steps.add(rcpStep.getInst());
 			}
+			this.steps = removeDuplicates(steps);
 		}
 
 		// add ingredients if not null (shouldn't be)
@@ -74,6 +77,7 @@ public class RecipeJS {
 
 				this.ingredients.add(ingJs);
 			}
+			this.ingredients = removeDuplicates(ingredients);
 		}
 
 		// add comments if not null (they may be)
@@ -89,7 +93,23 @@ public class RecipeJS {
 			for (final CommentAssociation rcpComment : rcpComments) {
 				this.comments.add(rcpComment.getCommentValue());
 			}
+			this.comments = removeDuplicates(comments);
 		}
+	}
+
+	private static <T> List<T> removeDuplicates(List<T> elements) {
+		final Set<T> set = new HashSet<>();
+
+		final List<T> newList = new ArrayList<>(elements.size());
+
+		for (final T element : elements) {
+			if (!set.contains(element)) {
+				set.add(element);
+				newList.add(element);
+			}
+		}
+
+		return newList;
 	}
 
 	public RecipeJS(final RecipeFull recipe) {
